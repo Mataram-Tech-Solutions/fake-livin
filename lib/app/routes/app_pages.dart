@@ -27,7 +27,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLAHS_SCREEN,
-      page: () => const SplahsScreenView(),
+      page: () => SplashScreenView(),
       binding: SplahsScreenBinding(),
     ),
   ];

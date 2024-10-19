@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 
 import '../controllers/splahs_screen_controller.dart';
 
-class SplahsScreenView extends GetView<SplahsScreenController> {
-  const SplahsScreenView({Key? key}) : super(key: key);
+class SplashScreenView extends StatefulWidget {
+  @override
+  _SplashScreenViewState createState() => _SplashScreenViewState();
+}
+
+class _SplashScreenViewState extends State<SplashScreenView> {
+  final SplahsScreenController controller = Get.put(SplahsScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

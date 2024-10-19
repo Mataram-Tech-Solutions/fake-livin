@@ -1,3 +1,4 @@
+import 'package:fake_livin/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';
 
 class SplahsScreenController extends GetxController {
@@ -7,6 +8,7 @@ class SplahsScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _navigateToNextPage();
   }
 
   @override
@@ -19,5 +21,14 @@ class SplahsScreenController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void _navigateToNextPage() {
+    Future.delayed(const Duration(seconds: 5), () {
+      print("Navigating to HomeView");
+      Get.off(
+        () => HomeView(),
+        transition: Transition.upToDown, // Menambahkan animasi geser
+        duration: const Duration(milliseconds: 1200), // Durasi animasi
+      );
+    });
+  }
 }
