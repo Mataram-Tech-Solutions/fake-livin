@@ -21,14 +21,14 @@ class SplahsScreenController extends GetxController {
     super.onClose();
   }
 
-  void _navigateToNextPage() {
-    Future.delayed(const Duration(seconds: 5), () {
-      print("Navigating to HomeView");
-      Get.off(
-        () => HomeView(),
-        transition: Transition.upToDown, // Menambahkan animasi geser
-        duration: const Duration(milliseconds: 1200), // Durasi animasi
-      );
-    });
+ void _navigateToNextPage() {
+  Future.delayed(const Duration(seconds: 5), () {
+    print("Navigating to HomeView");
+    Get.off(
+      () => HomeView(),
+      transition: Transition.zoom, // Menggunakan animasi zoom
+      duration: const Duration(milliseconds: 1200), // Durasi animasi
+    );
+  });
   }
 }
