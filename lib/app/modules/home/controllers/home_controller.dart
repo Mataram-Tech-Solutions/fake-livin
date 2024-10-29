@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
+  var selectedDateTime = ''.obs; // Reactive variable untuk menyimpan tanggal dan waktu
 
   final count = 0.obs;
   @override
@@ -20,4 +21,8 @@ class HomeController extends GetxController {
   }
 
   void increment() => count.value++;
+  void updateDateTime(String dateTime) {
+    selectedDateTime.value = dateTime;
+  }
 }
+
