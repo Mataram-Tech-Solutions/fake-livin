@@ -387,7 +387,7 @@ class _HomeViewState extends State<HomeView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 150,
+                        width: 180,
                         child: TextField(
                           decoration: InputDecoration(
                             filled: true,
@@ -435,6 +435,63 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
+                SizedBox(height: 15,),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Lainya :',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15,),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor:
+                            Colors.grey[300], // Warna latar belakang abu-abu
+                        hintText: 'No. Referensi Pelanggan (Opsional)',
+                        prefixIcon: Icon(
+                          Icons.bookmark, // Ikon yang cocok untuk reference
+                          color: Colors.grey[700],
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none, // Menghilangkan border
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 15), // Pusatkan teks secara vertikal
+                      ),
+                    )),
+                SizedBox(height: 15,),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor:
+                            Colors.grey[300], // Warna latar belakang abu-abu
+                        hintText: 'Deskripsi',
+                        prefixIcon: Icon(
+                          Icons.description, // Ikon yang cocok untuk reference
+                          color: Colors.grey[700],
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none, // Menghilangkan border
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 15), // Pusatkan teks secara vertikal
+                      ),
+                    )),
               ],
             ),
           ),
