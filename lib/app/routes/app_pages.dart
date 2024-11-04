@@ -17,7 +17,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () =>HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -30,5 +30,6 @@ class AppPages {
       page: () => SplashScreenView(),
       binding: SplahsScreenBinding(),
     ),
+    
   ];
 }

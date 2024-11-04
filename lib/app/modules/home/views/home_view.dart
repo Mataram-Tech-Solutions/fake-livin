@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/home_controller.dart'; // Pastikan path sesuai
+import '../controllers/home_controller.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -8,11 +8,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final HomeController controller =
-      Get.put(HomeController()); // Menginisialisasi controller
+  final HomeController controller = Get.put(HomeController());
 
   Future<void> _selectDateTime(BuildContext context) async {
-    // Memilih tanggal
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -21,14 +19,12 @@ class _HomeViewState extends State<HomeView> {
     );
 
     if (pickedDate != null) {
-      // Memilih waktu
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
       );
 
       if (pickedTime != null) {
-        // Menggabungkan tanggal dan waktu
         final DateTime selectedDateTime = DateTime(
           pickedDate.year,
           pickedDate.month,
@@ -37,12 +33,10 @@ class _HomeViewState extends State<HomeView> {
           pickedTime.minute,
         );
 
-        // Format output ke dalam d/m/y h:i:s
         String formattedDateTime =
             "${selectedDateTime.day}/${selectedDateTime.month}/${selectedDateTime.year} "
             "${selectedDateTime.hour}:${selectedDateTime.minute}:${selectedDateTime.second}";
 
-        // Memperbarui nilai di controller
         controller.updateDateTime(formattedDateTime);
       }
     }
@@ -66,8 +60,7 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          height:
-              MediaQuery.of(context).size.height, // Agar sesuai tinggi layar
+          height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -89,35 +82,34 @@ class _HomeViewState extends State<HomeView> {
                           child: AbsorbPointer(
                             // Mencegah interaksi langsung dengan TextField
                             child: Obx(() => TextField(
-                                  controller: TextEditingController(
+                              controller : TextEditingController(
                                       text: controller.selectedDateTime
-                                          .value), // Menampilkan hasil pemilih
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.grey[
-                                        300], // Warna latar belakang abu-abu
-                                    hintText: 'D/M/Y H:I:S',
-                                    prefixIcon: Icon(
-                                      Icons
-                                          .calendar_month, // Ikon yang cocok untuk tanggal/waktu
-                                      color: Colors.grey[700],
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide
-                                          .none, // Menghilangkan border
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical:
-                                            15), // Pusatkan teks secara vertikal
-                                  ),
-                                )),
+                                          .value), 
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey[300], // Warna latar belakang abu-abu
+                                hintText: 'D/M/Y H:I:S',
+                                prefixIcon: Icon(
+                                  Icons.calendar_month, // Ikon yang cocok untuk tanggal/waktu
+                                  color: Colors.grey[700],
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none, // Menghilangkan border
+                                ),
+                                contentPadding: EdgeInsets.symmetric(vertical: 15),
+                              ),
+                              onChanged: (value) {
+                                controller.updateDateTime(value);
+                              },
+                            )),
                           ),
                         ),
                       ),
                       SizedBox(width: 14), // Jarak antar TextField
                       Expanded(
                         child: TextField(
+                          controller: controller.refController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -163,6 +155,7 @@ class _HomeViewState extends State<HomeView> {
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
+                      controller: controller.ANrekController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor:
@@ -194,6 +187,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         width: 200,
                         child: TextField(
+                          controller: controller.nobnController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -217,6 +211,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(width: 14), // Jarak antar TextField
                       Expanded(
                         child: TextField(
+                          controller: controller.currController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -260,7 +255,7 @@ class _HomeViewState extends State<HomeView> {
                 SizedBox(
                   height: 15,
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0), // Padding sisi kiri dan kanan
                   child: Row(
@@ -271,14 +266,14 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         width: 250,
                         child: TextField(
+                          controller: controller.ANrektuController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
                                 .grey[300], // Warna latar belakang abu-abu
                             hintText: 'A.N Rekening',
                             prefixIcon: Icon(
-                              Icons
-                                  .person, // Ikon yang cocok untuk reference
+                              Icons.person, // Ikon yang cocok untuk reference
                               color: Colors.grey[700],
                             ),
                             border: OutlineInputBorder(
@@ -294,14 +289,14 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(width: 14), // Jarak antar TextField
                       Expanded(
                         child: TextField(
+                          controller: controller.bankController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
                                 .grey[300], // Warna latar belakang abu-abu
                             hintText: 'Bank',
                             prefixIcon: Icon(
-                              Icons
-                                  .balance, // Ikon yang cocok untuk reference
+                              Icons.balance, // Ikon yang cocok untuk reference
                               color: Colors.grey[700],
                             ),
                             border: OutlineInputBorder(
@@ -331,6 +326,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         width: 200,
                         child: TextField(
+                          controller: controller.nobntuController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -354,6 +350,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(width: 14), // Jarak antar TextField
                       Expanded(
                         child: TextField(
+                          controller: controller.currtuController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -377,7 +374,9 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0), // Padding sisi kiri dan kanan
@@ -389,6 +388,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         width: 180,
                         child: TextField(
+                          controller: controller.jutfController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -412,6 +412,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(width: 14), // Jarak antar TextField
                       Expanded(
                         child: TextField(
+                          controller: controller.bitfController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors
@@ -435,8 +436,10 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15,),
-                 Padding(
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 17),
                   child: Row(
                     children: [
@@ -450,10 +453,13 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
+                      controller: controller.norefpeController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor:
@@ -471,15 +477,18 @@ class _HomeViewState extends State<HomeView> {
                             vertical: 15), // Pusatkan teks secara vertikal
                       ),
                     )),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
+                      controller: controller.deskripsiController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor:
                             Colors.grey[300], // Warna latar belakang abu-abu
-                        hintText: 'Deskripsi',
+                        hintText: 'Deskripsi (Opsional)',
                         prefixIcon: Icon(
                           Icons.description, // Ikon yang cocok untuk reference
                           color: Colors.grey[700],
@@ -492,6 +501,31 @@ class _HomeViewState extends State<HomeView> {
                             vertical: 15), // Pusatkan teks secara vertikal
                       ),
                     )),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 20, horizontal: 16.0),
+                  child: ElevatedButton.icon(
+                     onPressed: () {
+                        controller.sendDataToPreview();
+                        Get.toNamed('/preview'); // Navigasi ke halaman preview
+                      },
+                    icon: Icon(
+                      Icons.visibility,
+                      color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna ikon di sini
+                    ),
+                    label: Text(''),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 31, 232, 9),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 160),
+                      textStyle:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
