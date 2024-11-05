@@ -37,6 +37,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    Get.lazyPut(() => PreviewController()); // Menginisialisasi PreviewController
+
 
     // Sinkronkan TextEditingController dengan nilai awal
     selectedDateTimeController.text = selectedDateTime.value;
@@ -93,8 +95,13 @@ class HomeController extends GetxController {
     void sendDataToPreview() {
        updateFormData(); // Update nilai field sebelum mengirim
 
-    Get.find<PreviewController>().setPreviewData({
+    if (!Get.isRegistered<PreviewController>()) {
+    Get.put(PreviewController()); // Memastikan PreviewController terdaftar
+  }
+  
+  Get.find<PreviewController>().setPreviewData({
       'dttm': selectedDateTime.value,
+      'dttmori': selectedDateTime.value,
       'ref': ref.value,
       'ANrek': ANrek.value,
       'nobn': nobn.value,
